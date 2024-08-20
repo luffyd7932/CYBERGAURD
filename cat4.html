@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: rgb(2,3,34);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-position: 50%;
+            background-repeat: no-repeat;
+        }
+        .content { display: none; }
+        .content.active { display: block; }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            background-color: #444;
+            color: #06b500;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #062643;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 50px;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            color: #000;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .pop-buttons {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .popup .next-btn {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .next-btn:hover {
+            background-color: #333;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .blur {
+            filter: blur(5px);
+        }
+
+        .image-container {
+    width: 800px; /* Ensure the container does not exceed the width of its parent */
+    height: 600px; /* Set maximum height as per your requirement */
+    overflow: hidden; /* Hide any overflow beyond the container */
+}
+
+.image-container img {
+    width: 800px; /* Ensure the image takes up the full width of its container */
+    height: 600px; /* Maintain aspect ratio */
+    display: block; /* Ensure the image is displayed as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+    </style>
+</head>
+<body>
+    <div id="intro" class="content active">
+        <h1>Welcome to the Game</h1>
+        <p>This page contains an introductory message. Click the button below to start the Game.</p>
+        <button onclick="startQuiz()">Start</button>
+    </div>
+
+    <div id="questions-container">
+        <div id="question1" class="content question">
+            <b>Question 1: Do you post yourself online everyday?<br><br></b>
+            <div class="image-container">
+                <img src="cat4_geek1.jpg" alt="Question 1">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(1, 'yes')">YES</button>
+                <button onclick="selectOption(1, 'no')">NO</button>
+            </div>
+        </div>
+        <div id="question2" class="content question">
+            <b>Question 2: Do you share personal inforamation about yourself to unknown people?<br><br></b>
+            
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(2, 'yes')">YES</button>
+                <button onclick="selectOption(2, 'no')">NO</button>
+            </div>
+        </div>
+        
+        <div id="question3" class="content question">
+            <b>Question 3: Do you share your location with unknown people?<br><br></b>
+            
+            <div class="buttons">
+                <button onclick="selectOption(3, 'yes')">YES</button>
+                <button onclick="selectOption(3, 'no')">NO</button>
+            </div>
+        </div>
+        <div id="question4" class="content question">
+            <b>Question 4:  Do you post images on third party websites intentionally or non intentionally such as beautification apps and filter implementing features?<br><br>
+</b>
+            <div class="image-container">
+                <img src="cat4_geek2.jpg" alt="Question 4">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(4, 'yes')">YES</button>
+                <button onclick="selectOption(4, 'no')">NO</button>
+            </div>
+        </div>
+        <div id="question5" class="content question">
+            <b> Question 5 : Do you post every moement of your life or unintentionally on sociaal media?<br>
+                 <br>
+            </b>
+             <br><br>
+             <div class="buttons">
+                 <button onclick="selectOption(5, 'yes')">YES</button>
+                 <button onclick="selectOption(5, 'no')">NO</button>
+             </div>
+         </div>
+        
+    </div>
+    <div id="score-container" class="content">
+        <h2>Your Safe Score: <span id="score"></span>/5</h2>
+        <button onclick="redirectToHome()">Know where you are vulnerable</button>
+
+    </div>
+
+    <div class="popup" id="popup">
+        <h2>Answer Feedback</h2>
+        <p id="popup-content">Your selected answer is ...</p>
+        <div class="pop-buttons">
+            <button class="next-btn" onclick="nextQuestion()">Next</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        const answers = {
+            1: 'no',
+            2: 'no',
+            3: 'no',
+            4: 'no',
+            5: 'no'
+        };
+        
+        const feedback = {
+            1: 'Explanation: Posting yourself online everyday makes you prone to cyber stalking. It can reveal your location. In turn, reveals a lot of information about you and your surroundings which is a critical danger',
+            2: 'Explanation: Revealing such personal information makes you vulnerable for people to use this information to impersonate you for their benefit.Explanation: Revealing your location on social media makes you vulnerable to stalkers who will exploit this private information and use it for their own benefit.',
+            3: 'Explanation: Revealing your location on social media makes you vulnerable to stalkers who will exploit this private information and use it for their own benefit ',
+            4: 'Explanation: Scamsters can use random moment pictures shared online for their own purposes such as fake news',
+            5: 'Explanation: Posting yourself online everyday makes you prone to cyber stalking. It can reveal your location. In turn, reveals a lot of information about you and your surroundings which is a critical danger'
+        };
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('intro').classList.remove('active');
+            showNextQuestion();
+        }
+
+        function selectOption(questionNumber, option) {
+            const isCorrect = option === answers[questionNumber];
+            if (isCorrect) {
+                score++;
+            }
+            showPopup(isCorrect, questionNumber);
+        }
+
+        function showPopup(isCorrect, questionNumber) {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            document.getElementById('popup-content').textContent = feedback[questionNumber];
+            popup.classList.add('active');
+            overlay.classList.add('active');
+            document.getElementById('questions-container').classList.add('blur');
+        }
+
+        function nextQuestion() {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+            document.getElementById('questions-container').classList.remove('blur');
+            showNextQuestion();
+        }
+
+        function showNextQuestion() {
+            if (currentQuestion > 0) {
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+            }
+            currentQuestion++;
+            if (currentQuestion <= Object.keys(answers).length) {
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('questions-container').style.display = 'none';
+            document.getElementById('score').textContent = score;
+            document.getElementById('score-container').classList.add('active');
+        }
+
+        function redirectToHome(){
+            window.location.href = 't1.html';
+        }
+    </script>
+</body>
+</html>

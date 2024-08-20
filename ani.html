@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Animation</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #020322;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .typewriter {
+            font-size: 2em;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid rgba(255, 255, 255, 0.75);
+            animation: caret 0.75s steps(1) infinite;
+        }
+
+        @keyframes caret {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="typewriter" id="typewriter"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const text = "Welcome to the Text Animation!";
+            const typewriterElement = document.getElementById('typewriter');
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    typewriterElement.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, 100); // Adjust speed here
+                }
+            }
+
+            type();
+        });
+    </script>
+</body>
+</html>

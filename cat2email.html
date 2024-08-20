@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: rgb(2,3,34);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-position: 50%;
+            background-repeat: no-repeat;
+        }
+        .content { display: none; }
+        .content.active { display: block; }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            background-color: #444;
+            color: #06b500;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #062643;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 50px;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            color: #000;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .pop-buttons {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .popup .next-btn {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-content img {
+    max-width: 80%; /* Adjust the percentage as desired */
+    max-height: 80vh; /* Adjust the maximum height as desired */
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+        .next-btn:hover {
+            background-color: #333;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .blur {
+            filter: blur(5px);
+        }
+
+        .image-container {
+    width: 800px; /* Ensure the container does not exceed the width of its parent */
+    height: 600px; /* Set maximum height as per your requirement */
+    overflow: hidden; /* Hide any overflow beyond the container */
+}
+
+.image-container img {
+    width:800px; /* Ensure the image takes up the full width of its container */
+    height: 600px; /* Maintain aspect ratio */
+    display: block; /* Ensure the image is displayed as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+    </style>
+</head>
+<body>
+    <div id="intro" class="content active">
+        <h1>Welcome to the Game</h1>
+        <p>This page contains an introductory message. Click the button below to start the Game.</p>
+        <button onclick="startQuiz()">Start</button>
+    </div>
+
+    <div id="questions-container">
+        <div id="question1" class="content question">
+           <b> Question 1 : Identify if this is a legit message or a scam?<br>
+
+            Storyline:<br><br>
+            Amit was browsing the internet on Google Chrome when he clicked on a pop-up ad that claimed he had won an iPhone. A new pop-up appeared, stating, "Congratulations! You have won an iPhone. Click here to claim your prize." Amit was excited but also skeptical, as he had heard about similar scams before.<br><br>
+            
+            Is this a legit message or a scam?<br><br>
+                <br>
+           </b>
+            <div class="image-container">
+                <img src="cat2_chrome.jpg" alt="Question 1">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(1, 'legit')">Legit</button>
+                <button onclick="selectOption(1, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+        <div id="question2" class="content question">
+            <b>Question 2:  Identify if this is a legit page or a scam?<br><br>
+
+                Storyline:<br><br>
+                David was experiencing issues with his NVIDIA graphics card and decided to contact support. <br>He found a website that claimed to be the official NVIDIA contact support page. The page requested his personal information and details about his issue to provide assistance. <br>However, David noticed that the URL looked slightly different <br>from what he expected from an official NVIDIA page and wondered if it was safe to proceed.<br><br>
+                
+                Is this a legit page or a scam?<br><br></b>
+            <div class="image-container">
+                <img src="cat2_nv.jpg" alt="Question 2">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(2, 'legit')">Legit</button>
+                <button onclick="selectOption(2, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+        <div id="question3" class="content question">
+            <b>Question 3: Identify if this is a legit alert or a scam?<br><br>
+
+                Storyline:<br><br>
+                Lina was working on her laptop when an alert popped up, supposedly from Windows Defender.<br> The alert stated, "Critical Alert from Microsoft: Zeus Virus Detected! Immediate action required. Click here to remove the virus." <br>Lina knew that the Zeus virus was a serious threat but wasn't sure if this alert was genuinely<br> from Windows Defender or a scam trying to trick her into downloading malicious software.<br><br>
+                
+                Is this a legit alert or a scam?<br><br></b>
+            <div class="image-container">
+                <img src="cat1whatsapp.jpeg" alt="Question 3">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(3, 'legit')">Legit</button>
+                <button onclick="selectOption(3, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+        <div id="question4" class="content question">
+            <b>Question 4: Identify if this is a legit message or a scam?<br><br>
+
+                Storyline:<br><br>
+                Riya was browsing a website when a pop-up appeared on the screen, seemingly from Dashlane, a password management tool.<br> The pop-up stated, "Protect your passwords with Dashlane. Click here to install now!" Riya, who was familiar<br> with Dashlane but hadn't encountered such pop-ups before, was unsure whether to trust the message or if it was a potential scam.<br><br>
+                
+                Is this a legit message or a scam?<br><br></b>
+            <div class="image-container">
+                <img src="cat2_6.jpg" alt="Question 4">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(4, 'legit')">Legit</button>
+                <button onclick="selectOption(4, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+        <div id="question5" class="content question">
+            <b>Question 5: Identify if this is a legit alert or a scam?<br><br>
+
+                Storyline:<br><br>
+                Shreya was using her desktop when a pop-up notification from Avast, her antivirus software, appeared on the screen.<br> The notification stated, "Attention! Your computer may be at risk. Click here to run a scan and remove any threats." <br>Shreya was unsure whether to trust the alert, as she had heard about<br> fake antivirus pop-ups designed to trick users into downloading malware.<br><br>
+                
+                Is this a legit alert or a scam?<br><br></b>
+            <div class="image-container">
+                <img src="cat2_7.jpg" alt="Question 5">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(5, 'legit')">Legit</button>
+                <button onclick="selectOption(5, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+    </div>
+    <div id="score-container" class="content">
+        <h2>Your Safe Score: <span id="score"></span>/5</h2>
+        <button onclick="redirectToHome()">Know where you are vulnerable</button>
+
+    </div>
+
+    <div class="popup" id="popup">
+        <h2>Answer Feedback</h2>
+        <div id="popup-content">
+            <img id="popup-image" src="" alt="">
+            <p id="popup-text"></p>
+        </div>
+        <div class="pop-buttons">
+            <button class="next-btn" onclick="nextQuestion()">Next</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        const answers = {
+            1: 'not legit',
+            2: 'legit',
+            3: 'legit',
+            4: 'not legit',
+            5: 'not legit'
+        };
+        
+        const feedback = {
+            1: 'How to figure out?Here you can see a link being forwarded on whatsapp on the name of discountsStep 1: Never trust links on whatsapp manually type them on your browser and visit in order to check for discountsStep 2: In above link you can see a weird "d" which is a clear sign of clickjacking, basically it is not an actual "d" but a letter from some other language which is similar to the english word "d"',
+            2: 'Instagram never messages you on your Instagram ID.It communicates you with their official support mail address on you registered mail id.Never click any links in your Instagram Direct messages it may lead you to malicious sites which will steal your information',
+            3: 'How to figure out?Here you can see a link being forwarded on whatsapp on the name of discountsStep 1: Never trust links on whatsapp manually type them on your browser and visit in order to check for discountsStep 2: In above link you can see a weird "d" which is a clear sign of clickjacking, basically it is not an actual "d" but a letter from some other language which is similar to the english word "d"',
+            4: 'In the above mail from a company called "Paypal" it is prompting you to authenticate your password.Here there are many things to be observed 1) The mail recipient here is not from paypal official mail domain and contains some random name where as the support mail address would look like service@paypal.com 2) The paypal logo is not the official paypal logo if you google it down.',
+            5: 'Here there is a clear case of brand impersonation which can be identified from the following factors:1) Legit Bulk SMS Vendor: It is credible SMS vendor. The SMS bulk vendor is verifiable at by typing vender id at https://www.smsgatewaycenter.com/trace-bulk-sms-sender/ ',
+            6: 'Solution:Contextual Relevance: Evaluate if the pop-up message appears in a contextually relevant situation. For example, if youre browsing a website related to cybersecurity or password management, a pop-up from Dashlane offering password protection would likely be legitimate. Context is crucial in determining the authenticity of the message.Brand Reputation: Consider the reputation of the brand associated with the pop-up. Dashlane is a well-known and reputable password management tool used by millions worldwide. Legitimate companies like Dashlane are unlikely to engage in deceptive practices or spam users with unsolicited pop-ups on random websites.Consistency with Known Patterns: Assess if the pop-up aligns with known patterns of legitimate messages from the brand. Legitimate pop-ups from Dashlane typically offer password protection services and encourage users to enhance their online security. If the message deviates significantly from Dashlanes typical offerings or tone, it may raise suspicions of being a scam.',
+            7: ''
+        };
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('intro').classList.remove('active');
+            showNextQuestion();
+        }
+
+        function selectOption(questionNumber, option) {
+            const isCorrect = option === answers[questionNumber];
+            if (isCorrect) {
+                score++;
+            }
+            showPopup(isCorrect, questionNumber);
+        }
+
+        function showPopup(isCorrect, questionNumber) {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            document.getElementById('popup-content').textContent = feedback[questionNumber];
+            popup.classList.add('active');
+            overlay.classList.add('active');
+            document.getElementById('questions-container').classList.add('blur');
+        }
+
+        function nextQuestion() {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+            document.getElementById('questions-container').classList.remove('blur');
+            showNextQuestion();
+        }
+
+        function showNextQuestion() {
+            if (currentQuestion > 0) {
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+            }
+            currentQuestion++;
+            if (currentQuestion <= Object.keys(answers).length) {
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('questions-container').style.display = 'none';
+            document.getElementById('score').textContent = score;
+            document.getElementById('score-container').classList.add('active');
+        }
+
+        function redirectToHome(){
+            window.location.href = 'reviewcat3.html';
+        }
+
+        function showPopup(isCorrect, questionNumber) {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            const popupContent = document.getElementById('popup-content');
+            const popupImage = document.getElementById('popup-image');
+            const popupText = document.getElementById('popup-text');
+
+            // Set the popup content based on question number
+            switch (questionNumber) {
+                case 1:
+                    popupText.textContent = feedback[questionNumber];
+                    popupImage.src = '';
+                    break;
+                case 2:
+                    popupText.textContent = feedback[questionNumber];
+                    popupImage.src = '';
+                    break;
+                case 3:
+                    popupText.textContent = feedback[questionNumber];
+                    popupImage.src = 'c.jpeg';
+                    break;
+                case 4:
+                    popupText.textContent = feedback[questionNumber];
+                    popupImage.src = 'cat6.jpg';
+                    break;
+                case 5:
+                    popupText.textContent = feedback[questionNumber];
+                    popupImage.src = '.jpg';
+                    break;
+                default:
+                    break;
+            }
+
+            popup.classList.add('active');
+            overlay.classList.add('active');
+            document.getElementById('questions-container').classList.add('blur');
+        }
+
+    </script>
+</body>
+</html>

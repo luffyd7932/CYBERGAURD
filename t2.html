@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+    <style>
+         body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(2, 3, 34);
+            height: 100vh;
+        }
+
+        .title{
+            color: #fff;
+            margin-bottom: 0;
+            margin: 5px;
+            position: fixed;
+            top: 10px;
+            left: 6%;
+            font-size: 20px;
+        }
+
+        .btn-trigger {
+            z-index: 5;
+            cursor: pointer;
+            position: absolute;
+            right: 25px;
+            top: 3px;
+            width: 50px;
+            height: 50px;
+            background-color: #333;
+            border: 0;
+            color: #fff;
+        }
+
+        .btn-trigger:hover {
+            background-color: #00000045;
+            transition: 0.5 ease;
+            border-radius: 8px;
+        }
+
+        nav {
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100%;
+            background-color: #333;
+            position: fixed;
+            transition: 0.5s all;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        nav ul li {
+            padding: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: 0.5s all;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul li a:hover {
+            color: rgb(0, 176, 0);
+        }
+
+        .menu-text {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+        .btn-trigger {
+            width: 40px;
+            height: 40px;
+            right: 15px;
+            top: 10px;
+        }
+
+        nav ul li a {
+            font-size: 1rem;
+        }
+
+        nav ul li {
+            padding: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .btn-trigger {
+            width: 30px;
+            height: 30px;
+            right: 10px;
+            top: 5px;
+        }
+
+
+        nav ul li a {
+            font-size: 0.9rem;
+        }
+
+        nav ul li {
+            padding: 8px;
+        }
+    }
+
+
+        header{
+            border-bottom: 1px solid rgba(255, 255, 255, 0.334);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgb(1, 3, 46);
+        }
+
+        
+
+        .topnav {
+         overflow: hidden;
+        
+        }
+
+        .topnav .search-container {
+        float: left;
+        margin-left: 18%;
+        
+        }
+
+        .topnav input[type=text] {
+         padding: 10px;
+         margin-top: 8px;
+         font-size: 17px;
+         border: none;
+        }
+
+        .topnav .search-container .search1 {
+        float: right;
+        padding: 10px 10px;
+        margin-top: 8px;
+        margin-right: 20px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+        transition: margin-left 0.5s ease;
+        }
+
+        .topnav .search-container .search1:hover {
+        background: #ccc;
+        }
+
+        @media screen and (max-width: 600px) {
+        .topnav .search-container {
+        float: none;
+        }
+        .topnav a, .topnav input[type=text], .topnav .search-container button {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+        }
+        .topnav input[type=text] {
+        border: 1px solid #ccc;  
+        }
+        }
+
+        .profile {
+  float: right;
+  border-radius: 4px;
+  background-color: #06b500;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  margin-bottom: 0%;
+  margin-right: 17px;
+}
+
+.profile span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.profile span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.profile:hover span {
+  padding-right: 15px;
+}
+
+.profile:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+        
+        .upper-section{
+            display: flex;
+            flex-direction: row;
+            margin-top: 30px;
+            margin-left: 90px;
+        }
+        .box-img{
+            border-radius: 5px;
+            background-color: #ccc;
+            height: 300px;
+            width: 50%;
+            cursor: pointer;
+        }
+
+        .score-card{
+            background-color: #022737;
+            margin-right: 15px;
+            border-radius: 5px;
+            height: 300px;
+            width: 40%;
+            cursor: pointer;
+        }
+
+        .features{
+            border: 1px solid #ffffff35;
+            transition: none; 
+            width: 100%; 
+        }
+
+        .btn-features{
+            color: #fff;
+            padding: 20px;
+            width: 20%;
+            height: 300px; 
+            background-color: transparent;
+            cursor: pointer;
+            border:1px solid white;
+            margin: 25px;
+            border-radius: 10px;
+            
+        }
+        
+        .btn-features:hover{
+            background-color: #333;
+        }
+
+        .buff{
+            margin: 10% 12% 0 12%;
+        }
+
+        .buff1{
+            margin: 5% 12% 0 12%;
+            margin-bottom: 12%;
+        }
+
+    
+        .recent{
+            font-size: 15px;
+            margin-left: 88px;
+            color: #ddd7d7aa;
+            margin-bottom: 4px;
+            margin-top: 30px;
+        }
+
+        .recent-info{
+            color: #fff;
+            margin-left: 88px;
+            text-decoration: none;
+        }
+
+        .recent-info:hover{
+            color: aqua ;
+        }
+
+        .mid-section{
+            border: 2px solid white;
+            color: #fff;
+            margin-bottom: 10%;
+            margin-left: 90px;
+        }
+
+        .challenge-btn{
+            padding: 10px;
+            font-family: sans-serif;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        .challenge-btn:hover{
+            background-color: #06b500;
+        }
+        
+        .img{
+            width: 200px;
+            height: 300px;
+            border-radius: 10px;
+        }
+        </style>
+
+</head>
+
+<body>
+
+
+    <header>
+       <span class="title">HaCkTheHAckur</span>
+        <div class="topnav" id="navbar">
+            <div class="search-container">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search.." name="search">
+                  <button type="submit" class="search1"><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+              <button class="profile" onclick="redirectToProfile()"><span> Profile</span></button>
+        </div>
+
+    </header>
+    
+    <br>
+
+    <nav id="sidebar">
+        <button id="trigger-btn" class="btn-trigger" aria-label="Toggle Menu">
+            <i class="fa fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#"><i class="logo"></i><span class="menu-text">HackTheHackur</span></a></li> <br>
+            <li><a href="#"><i class="fa fa-fw fa-home"></i><span class="menu-text">Home</span></a></li>
+            <li><a href="#"><i class="fa fa-fw fa-info-circle"></i><span class="menu-text">About Us</span></a></li>
+            <li><a href="#"><i class="fa fa-fw fa-envelope"></i><span class="menu-text">Contact</span></a></li>
+            <li><a href="#"><i class="fa fa-fw fa-gear"></i><span class="menu-text">Settings</span></a></li>
+        </ul>
+    </nav>
+
+    <br>
+
+<div>
+    <p class="recent"><b>RECENT :</b></p>
+    <a href="#" class="recent-info">Display any info</a>
+</div>
+
+
+
+    <section class="upper-section">
+        <div class="box-img">
+        <img src="paris.jpg" alt="Paris">
+        </div>
+    <hr>
+        <div class="score-card">
+        
+
+
+        </div>
+    </section>
+
+    <br>
+
+    <div class="mid-section" >
+        <h1>Display the Info<h1>
+            <button id="challenge-button" type="submit" class="challenge-btn">Take Up challenge</button>
+    </div>
+    
+    <div class="features" id="features-section">
+        <div class="buff">
+        <button  class="btn-features" id="button1" onclick="redirectToA()">
+            <img src="koushal.jpg" alt="spidy" class="img">A</button>
+        <button  class="btn-features" id="button2" onclick="redirectToB()">B</button>
+        <button  class="btn-features" id="button3" onclick="redirectToC()">C</button>
+        <button  class="btn-features" id="button4" onclick="redirectToD()">D</button>
+        </div>
+
+    
+        <div class="buff1">
+        <button  class="btn-features" id="button1" onclick="redirectToE()">E</button>
+        <button  class="btn-features" id="button2" onclick="redirectToF()">F</button>
+        <button  class="btn-features" id="button3" onclick="redirectToG()">G</button>
+        <button  class="btn-features" id="button4" onclick="redirectToH()">H</button>
+        </div>
+    </div>
+    
+
+    <br>
+
+    
+    <footer>
+        <br>
+        <br>
+    </footer>
+
+
+    <script>
+
+        //Redirecting profil
+
+        function redirectToProfile(){
+            window.location.href = 'https://example.com'
+        }
+
+        //Side Bar Navigation
+
+        const sidebar = document.getElementById('sidebar');
+        const btn = document.getElementById('trigger-btn');
+        const menuText = document.querySelectorAll('.menu-text');
+        //const mainContent = document.getElementById('main-content');
+        const challengeButton = document.getElementById('challenge-button');
+        const featuresSection = document.getElementById('features-section');
+        const navbar = document.getElementById('navbar');
+
+
+        let sidebarActive = true; 
+        
+        btn.addEventListener('click', () => {
+            if (sidebarActive) {
+                sidebar.style.width = '80px';
+                //mainContent.style.marginLeft = '80px';
+                sidebarActive = false;
+                // Change button content back to hamburger icon
+                btn.innerHTML = '&#9776;';
+                menuText.forEach(text => {
+                    text.style.display = 'none';
+                });
+            } else {
+                sidebar.style.width = '250px';
+                //mainContent.style.marginLeft = '250px';
+                sidebarActive = true;
+                // Change button content to close icon
+                btn.innerHTML = '<i class="fa fa-times"></i>';
+                menuText.forEach(text => {
+                    text.style.display = 'flex';
+                });
+            }
+        });
+
+        // Immediately close the navigation bar when the page loads
+        window.addEventListener('load', () => {
+            btn.click(); // Trigger click event on the button
+        });
+
+        //Scroll Take up challenge
+
+        challengeButton.addEventListener('click', () => {
+            const navbarHeight = navbar.offsetHeight;
+            const featuresPosition = featuresSection.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = featuresPosition - navbarHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        });
+
+        //Content Buttons Highlight
+       
+
+
+//Blur Content
+       
+        
+       
+//Content Functions
+
+
+
+
+//Redirecting Get Started
+
+
+        </script>
+    
+</body>
+</html>

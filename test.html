@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: rgb(2,3,34);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-position: 50%;
+            background-repeat: no-repeat;
+        }
+        .content { display: none; }
+        .content.active { display: block; }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            background-color: #444;
+            color: #06b500;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #062643;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 50px;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            color: #000;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .pop-buttons {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .popup .next-btn {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .next-btn:hover {
+            background-color: #333;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .blur {
+            filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+    <div id="intro" class="content active">
+        <h1>Welcome to the Game</h1>
+        <p>This page contains an introductory message. Click the button below to start the Game.</p>
+        <button onclick="startQuiz()">Start</button>
+    </div>
+
+    <div id="questions-container">
+        <div id="question1" class="content question">
+           <b> <p>Question 1: Identify if this is a legit email or a scam?<br>
+                <br>
+                Storyline:<br><br>
+                Chetana received an email that seems to be from her bank.<br>
+                The subject line reads, "Urgent: Account Verification Required". <br>
+                Chetana isn’t sure whether to trust it, as she’s heard about email scams but has never encountered one herself. <br>
+                The email contains a link asking her to verify her account information to prevent it from being suspended.<br>
+                <br><br>
+                Is this a legit email or a scam?</p>
+                <br>
+           </b>
+            <div class="image-container">
+                <img src="cat1email.jpeg" alt="Question 1">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(1, 'legit')">Legit</button>
+                <button onclick="selectOption(1, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+        <div id="question2" class="content question">
+            <b>Question 2: Identify if this is a legit message or a scam?
+            <br>
+            Storyline:<br><br>
+            Sara received a direct message on Instagram claiming to be from the platform itself.<br> 
+            The message stated, "We've detected suspicious activity on your account. <br>
+            Click the link to log in and confirm your identity, or your account will be deactivated."<br> 
+            Sara is skeptical as she's aware of online scams but wonders if Instagram would really contact her in this manner.<br>
+            <br><br>
+            Is this a legit message or a scam?<br><br></b>
+            <div class="image-container">
+                <img src="cat1insta.jpeg" alt="Question 2">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(2, 'legit')">Legit</button>
+                <button onclick="selectOption(2, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+        <div id="question3" class="content question">
+            <b>Identify if this link received on WhatsApp is credible or a scam?<br>
+            <br>
+            Storyline:<br><br>
+            Aman received a WhatsApp message from an unknown number.<br>
+            The message claims that he has won a prize from a well-known electronics store.<br>
+            The message contains a link that he needs to click to claim his prize.<br><br>
+            Is this link credible or a scam?<br><br></b>
+            <div class="image-container">
+                <img src="cat1whatsapp.jpeg" alt="Question 3">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(3, 'legit')">Legit</button>
+                <button onclick="selectOption(3, 'not legit')">Not Legit</button>
+            </div>
+        </div><div id="question4" class="content question">
+           <b> Question 4: Identify if this is a legit email or a scam?<br>
+            <br><br>
+            Storyline:<br><br>
+            Priya received an email from a Gmail account claiming to be from PayPal. <br>
+            The email stated, "Your PayPal account has been flagged by our system for authentication. <br>
+            Please view the possible events listed below for this cause." <br>
+            Priya is cautious as she's heard of email scams targeting PayPal users but wonders if this email could be genuine.<br>
+            <br><br>
+            Is this a legit email or a scam?<br><br></b>
+            <div class="image-container">
+                <img src="cat1pay.jpeg" alt="Question 4">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(4, 'legit')">Legit</button>
+                <button onclick="selectOption(4, 'not legit')">Not Legit</button>
+            </div>
+        </div><div id="question5" class="content question">
+            <b>Question 5: Identify if this link received on WhatsApp is credible or a scam?<br>
+            <br>
+            Storyline:<br><br>
+            Ravi received a WhatsApp message from an unknown number. <br>
+            The message claims that ASDA is giving away free vouchers worth £250 to celebrate their anniversary. <br>
+            The message includes a link that he needs to click to claim the voucher.<br><br></b>
+            <div class="image-container">
+                <img src="cat1wts2.jpeg" alt="Question 5">
+            </div>
+            <br><br>
+            <div class="buttons">
+                <button onclick="selectOption(5, 'legit')">Legit</button>
+                <button onclick="selectOption(5, 'not legit')">Not Legit</button>
+            </div>
+        </div>
+    </div>
+    <div id="score-container" class="content">
+        <h2>Your Safe Score: <span id="score"></span>/5</h2>
+    </div>
+
+    <div class="popup" id="popup">
+        <h2>Answer Feedback</h2>
+        <p id="popup-content">Your selected answer is ...</p>
+        <div class="pop-buttons">
+            <button class="next-btn" onclick="nextQuestion()">Next</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        const answers = {
+            1: 'not legit',
+            2: 'not legit',
+            3: 'not legit',
+            4: 'not legit',
+            5: 'not legit'
+        };
+        
+        const feedback = {
+            1: 'The email is likely a scam. Banks usually do not request personal information via email links.',
+            2: 'The message is a scam. Instagram does not send such messages through DMs asking for account verification.',
+            3: 'The message is a scam. Legitimate companies do not send prize messages via WhatsApp from unknown numbers.',
+            4: 'The email is a scam. PayPal does not use Gmail accounts and does not ask for verification via suspicious emails.',
+            5: 'The message is a scam. ASDA does not give away free vouchers via random WhatsApp messages.'
+        };
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('intro').classList.remove('active');
+            showNextQuestion();
+        }
+
+        function selectOption(questionNumber, option) {
+            const isCorrect = option === answers[questionNumber];
+            if (isCorrect) {
+                score++;
+            }
+            showPopup(isCorrect, questionNumber);
+        }
+
+        function showPopup(isCorrect, questionNumber) {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            document.getElementById('popup-content').textContent = feedback[questionNumber];
+            popup.classList.add('active');
+            overlay.classList.add('active');
+            document.getElementById('questions-container').classList.add('blur');
+        }
+
+        function nextQuestion() {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+            document.getElementById('questions-container').classList.remove('blur');
+            showNextQuestion();
+        }
+
+        function showNextQuestion() {
+            if (currentQuestion > 0) {
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+            }
+            currentQuestion++;
+            if (currentQuestion <= Object.keys(answers).length) {
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('questions-container').style.display = 'none';
+            document.getElementById('score').textContent = score;
+            document.getElementById('score-container').classList.add('active');
+        }
+    </script>
+</body>
+</html>

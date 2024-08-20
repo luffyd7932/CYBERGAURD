@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+    <style>
+         body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(2, 3, 34);
+            height: 100vh;
+        }
+
+        .title{
+            color: #fff;
+            margin-bottom: 0;
+            margin: 5px;
+            position: fixed;
+            top: 10px;
+            left: 6%;
+            font-size: 20px;
+        }
+
+        .btn-trigger {
+            z-index: 5;
+            cursor: pointer;
+            position: absolute;
+            right: 25px;
+            top: 3px;
+            width: 50px;
+            height: 50px;
+            background-color: #333;
+            border: 0;
+            color: #fff;
+        }
+
+        .btn-trigger:hover {
+            background-color: #00000045;
+            transition: 0.5 ease;
+            border-radius: 8px;
+        }
+
+        nav {
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100%;
+            background-color: #333;
+            position: fixed;
+            transition: 0.5s all;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        nav ul li {
+            padding: 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: 0.5s all;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul li a:hover {
+            color: rgb(0, 176, 0);
+        }
+
+        .menu-text {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+        .btn-trigger {
+            width: 40px;
+            height: 40px;
+            right: 15px;
+            top: 10px;
+        }
+
+        nav ul li a {
+            font-size: 1rem;
+        }
+
+        nav ul li {
+            padding: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .btn-trigger {
+            width: 30px;
+            height: 30px;
+            right: 10px;
+            top: 5px;
+        }
+
+
+        nav ul li a {
+            font-size: 0.9rem;
+        }
+
+        nav ul li {
+            padding: 8px;
+        }
+    }
+
+
+        header{
+            border-bottom: 1px solid rgba(255, 255, 255, 0.334);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgb(1, 3, 46);
+        }
+
+        
+
+        .topnav {
+         overflow: hidden;
+        
+        }
+
+        .topnav .search-container {
+        float: left;
+        margin-left: 18%;
+        
+        }
+
+        .topnav input[type=text] {
+         padding: 10px;
+         margin-top: 8px;
+         font-size: 17px;
+         border: none;
+        }
+
+        .topnav .search-container .search1 {
+        float: right;
+        padding: 10px 10px;
+        margin-top: 8px;
+        margin-right: 20px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+        transition: margin-left 0.5s ease;
+        }
+
+        .topnav .search-container .search1:hover {
+        background: #ccc;
+        }
+
+        @media screen and (max-width: 600px) {
+        .topnav .search-container {
+        float: none;
+        }
+        .topnav a, .topnav input[type=text], .topnav .search-container button {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+        }
+        .topnav input[type=text] {
+        border: 1px solid #ccc;  
+        }
+        }
+
+        .profile {
+  float: right;
+  border-radius: 4px;
+  background-color: #06b500;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  margin-bottom: 0%;
+  margin-right: 17px;
+}
+
+.profile span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.profile span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.profile:hover span {
+  padding-right: 15px;
+}
+
+.profile:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+        
+        .upper-section{
+            display: flex;
+            flex-direction: row;
+            margin-top: 30px;
+            margin-left: 90px;
+        }
+        .box-img{
+            border-radius: 5px;
+            background-color: #ccc;
+            height: 300px;
+            width: 50%;
+            cursor: pointer;
+        }
+
+        .score-card{
+            background-color: #022737;
+            margin-right: 15px;
+            border-radius: 5px;
+            height: 300px;
+            width: 40%;
+            cursor: pointer;
+        }
+
+        .features{
+            border-bottom: 1px solid #ffffff35;
+            transition: none;  
+        }
+
+        .btn-features{
+            color: #fff;
+            padding: 10px;
+            width: 20%;
+            height: 50px; 
+            background-color: transparent;
+            cursor: pointer;
+            border:none;
+            transition: background-color 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .btn-features:hover{
+            background-color: #333;
+        }
+
+        .buff{
+            margin-left: 10%;
+        }
+
+        .active-button {
+            border-bottom: 2px solid #00b315 !important;
+        }
+
+        .section{
+            display: flex;
+            margin-left: 8%;
+            overflow: hidden;
+        }
+
+
+        .box-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        }
+
+       
+
+        .box {
+        width: 200px;
+        height: 250px;
+        padding: 15px;
+        background-color: #ffffff;
+        border: 2px solid #000;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.2s;
+        margin: 10px;
+        
+        }
+
+        .box img {
+        width: 80%;
+        border-radius: 10px;
+        }
+
+        .box p {
+        margin-top: 15px;
+        font-size: 18px;
+        color: #333;
+        }
+
+        .box:hover {
+        transform: scale(1.05);
+        }
+
+
+    
+    #content1, #content2, #content3, #content4 {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    #content1{
+        display: block;
+    }      
+    
+    .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 50px;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+        }
+
+        .pop-buttons{
+            display: flex;
+        }
+
+        .popup .close-btn {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn{
+            width: 10%;
+        }
+
+        .close-btn:hover{
+            background-color: #333;
+        }
+
+        .get-started-btn{
+
+            margin: 10px 0;
+            margin-left: 50%;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 30%;
+        }
+
+        .get-started-btn:hover{
+            background-color: #06b500;
+        }
+
+        
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .blur {
+            filter: blur(10px);
+        }
+
+        .recent{
+            font-size: 15px;
+            margin-left: 88px;
+            color: #ddd7d7aa;
+            margin-bottom: 4px;
+            margin-top: 30px;
+        }
+
+        .recent-info{
+            color: #fff;
+            margin-left: 88px;
+            text-decoration: none;
+        }
+
+        .recent-info:hover{
+            color: aqua ;
+        }
+
+        .mid-section{
+            border: 2px solid white;
+            color: #fff;
+            margin-bottom: 10%;
+            margin-left: 90px;
+        }
+
+        .challenge-btn{
+            padding: 10px;
+            font-family: sans-serif;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        .challenge-btn:hover{
+            background-color: #06b500;
+        }
+        
+        </style>
+
+</head>
+
+<body>
+
+
+    <header>
+       <span class="title">HaCkTheHAckur</span>
+        <div class="topnav" id="navbar">
+            <div class="search-container">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search.." name="search">
+                  <button type="submit" class="search1"><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+              <button class="profile" onclick="redirectToProfile()"><span> Profile</span></button>
+        </div>
+
+    </header>
+    
+    <br>
+
+    <nav id="sidebar">
+        <button id="trigger-btn" class="btn-trigger" aria-label="Toggle Menu">
+            <i class="fa fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#"><i class="logo"></i><span class="menu-text">HackTheHackur</span></a></li> <br>
+            <li><a href="#"><i class="fa fa-fw fa-home"></i><span class="menu-text">Home</span></a></li>
+            <li><a href="#"><i class="fa fa-fw fa-info-circle"></i><span class="menu-text">About Us</span></a></li>
+            <li><a href="#"><i class="fa fa-fw fa-envelope"></i><span class="menu-text">Contact</span></a></li>
+            <li><a href="#"><i class="fa fa-fw fa-gear"></i><span class="menu-text">Settings</span></a></li>
+        </ul>
+    </nav>
+
+    <br>
+
+<div>
+    <p class="recent"><b>RECENT :</b></p>
+    <a href="#" class="recent-info">Display any info</a>
+</div>
+
+
+
+    <section class="upper-section">
+        <div class="box-img">
+        <img src="paris.jpg" alt="Paris">
+        </div>
+    <hr>
+        <div class="score-card">
+        
+
+
+        </div>
+    </section>
+
+    <br>
+
+    <div class="mid-section" >
+        <h1>Display the Info<h1>
+            <button id="challenge-button" type="submit" class="challenge-btn">Take Up challenge</button>
+    </div>
+    
+    <div class="features" id="features-section">
+        <div class="buff">
+        <button  class="btn-features" id="button1">OHHHH</button>
+        <button  class="btn-features" id="button2">MYYY</button>
+        <button  class="btn-features" id="button3">Goddd</button>
+        <button  class="btn-features" id="button4">WTF</button>
+        </div>
+    </div>
+
+    <br>
+
+    <div id="content1" class="blur-background">
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup1')">
+                    <img src="kousal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup2')">
+                    <img src="lax.jpg" alt="Image Description">
+                    <p>WaiWai</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup3')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>This is some text inside the box.</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup4')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>This is some text inside the box.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup5')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup6')">
+                    <img src="lax.jpg" alt="Image Description">
+                    <p>WaiWai</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup7')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>This is some text inside the box.</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup8')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>This is some text inside the box.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+    <div id="popup1" class="popup">
+        <p>Lorem ipsum dolor sit amet consectettent for hjkahdkjahdkahsdkjhaskjdh
+            sdjhashgdkjasgdkjashdiuoashdoajih diouashdaoirhiuoweehfewavbfjhsdbciuygfianfkj
+            The Hackur.</p>
+        <div class="pop-buttons">
+        <div class="close-btn" onclick="hidePopup('popup1')">Close</div>
+        <div class="get-started-btn" onclick="btn1()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup2" class="popup">
+        <p>This is popup content for WaiWai.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup2')">Close</div>
+        <div class="get-started-btn" onclick="btn2()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup3" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup3')">Close</div>
+        <div class="get-started-btn" onclick="btn3()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup4" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup4')">Close</div>
+        <div class="get-started-btn" onclick="btn4()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup5" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup5')">Close</div>
+        <div class="get-started-btn" onclick="btn5()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup6" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup6')">Close</div>
+        <div class="get-started-btn" onclick="btn6()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup7" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup7')">Close</div>
+        <div class="get-started-btn" onclick="btn7()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup8" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup8')">Close</div>
+        <div class="get-started-btn" onclick="btn8()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+
+
+   <div id="content2" class="blur-background hidden">
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup9')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup10')">
+                    <img src="lax.jpg" alt="Image Description">
+                    <p>WaiWai</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup11')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>This is some text inside the box.</p>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup12')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup13')">
+                    <img src="lax.jpg" alt="Image Description">
+                    <p>WaiWai</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup14')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>This is some text inside the box.</p>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+
+
+
+    <div id="popup9" class="popup">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident accusamus optio beatae rem, sapiente quis inventore dolor fuga eos, quia doloribus autem. Voluptate esse, adipisci in sequi vel consectetur rem?
+        Aut amet dolores delectus, eius veritatis assumenda accusamus enim deserunt ex animi voluptatem harum dolorum. Quaerat, nostrum libero officiis, eligendi voluptatem error itaque sequi sunt recusandae molestias, mollitia alias minus. This is popup content for The Hackur.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup9')">Close</div>
+        <div class="get-started-btn" onclick="btn9()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup10" class="popup">
+        <p>This is popup content for WaiWai.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup10')">Close</div>
+        <div class="get-started-btn" onclick="btn10()">Get Started</div>
+            </div>
+    </div>
+
+    <div id="popup11" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup11')">Close</div>
+        <div class="get-started-btn" onclick="btn11()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup12" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup12')">Close</div>
+        <div class="get-started-btn" onclick="btn12()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup13" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup13')">Close</div>
+        <div class="get-started-btn" onclick="btn13()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup14" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup14')">Close</div>
+        <div class="get-started-btn" onclick="btn14()">Get Started</div>
+            </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+
+    
+    
+    <div id="content3" class="blur-background hidden">
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup15')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup16')">
+                    <img src="la.jpg" alt="Image Description">
+                    <p>WaiWai</p>
+                </div>
+           
+        </section>
+
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup17')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup18')">
+                    <img src="lax.jpg" alt="Image Description">
+                    <p>WaiWai</p>
+                </div>
+            </div>
+           
+        </section>
+    </div>
+
+
+
+    <div id="popup15" class="popup">
+        <p>Lorem ipsumdelectus, eius veritatis assumenda accusamus enim deserunt ex animi voluptatem harum dolorum. Quaerat, nostrum libero officiis, eligendi voluptatem error itaque sequi sunt recusandae molestias, mollitia alias minus. This is popup content for The Hackur.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup15')">Close</div>
+        <div class="get-started-btn" onclick="btn15()">Get Started</div>
+        </div>
+    </div>
+
+    <div id="popup16" class="popup">
+        <p>This is popup content for WaiWai.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup16')">Close</div>
+        <div class="get-started-btn" onclick="btn16()">Get Started</div>
+            </div>
+    </div>
+
+    <div id="popup17" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup17')">Close</div>
+        <div class="get-started-btn" onclick="btn17()">Get Started</div>
+            </div>
+    </div>
+
+    <div id="popup18" class="popup">
+        <p>This is some text inside the popup.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup18')">Close</div>
+        <div class="get-started-btn" onclick="btn18()">Get Started</div>
+            </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+
+
+    <div id="content4" class="blur-background hidden">
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup19')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="section">
+            <div class="box-container">
+                <div class="box" onclick="showPopup('popup20')">
+                    <img src="koushal.jpg" alt="Image Description">
+                    <p>The Hackur</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+    <div id="popup19" class="popup">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident accusamus optio beatae rem, sapiente quis inventore dolor fuga eos, quia doloribus autem. Voluptate esse, adipisci in sequi vel consectetur rem?
+        Aut amet dolores delectus, eius veritatis assumenda accusamus enim deserunt ex animi voluptatem harum dolorum. Quaerat, nostrum libero officiis, eligendi voluptatem error itaque sequi sunt recusandae molestias, mollitia alias minus. This is popup content for The Hackur.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup19')">Close</div>
+        <div class="get-started-btn" onclick="btn19()">Get Started</div>
+            </div>
+    </div>
+
+    <div id="popup20" class="popup">
+        <p>This is popup content for WaiWai.</p>
+        <div class="pop-buttons">
+
+        <div class="close-btn" onclick="hidePopup('popup20')">Close</div>
+        <div class="get-started-btn" onclick="btn20()">Get Started</div>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div> 
+
+    <footer>
+        <br>
+        <br>
+    </footer>
+
+
+    <script>
+
+        //Redirecting profil
+
+        function redirectToProfile(){
+            window.location.href = 'https://example.com'
+        }
+
+        //Side Bar Navigation
+
+        const sidebar = document.getElementById('sidebar');
+        const btn = document.getElementById('trigger-btn');
+        const menuText = document.querySelectorAll('.menu-text');
+        //const mainContent = document.getElementById('main-content');
+        const challengeButton = document.getElementById('challenge-button');
+        const featuresSection = document.getElementById('features-section');
+        const navbar = document.getElementById('navbar');
+
+
+        let sidebarActive = true; 
+        
+        btn.addEventListener('click', () => {
+            if (sidebarActive) {
+                sidebar.style.width = '80px';
+                //mainContent.style.marginLeft = '80px';
+                sidebarActive = false;
+                // Change button content back to hamburger icon
+                btn.innerHTML = '&#9776;';
+                menuText.forEach(text => {
+                    text.style.display = 'none';
+                });
+            } else {
+                sidebar.style.width = '250px';
+                //mainContent.style.marginLeft = '250px';
+                sidebarActive = true;
+                // Change button content to close icon
+                btn.innerHTML = '<i class="fa fa-times"></i>';
+                menuText.forEach(text => {
+                    text.style.display = 'flex';
+                });
+            }
+        });
+
+        // Immediately close the navigation bar when the page loads
+        window.addEventListener('load', () => {
+            btn.click(); // Trigger click event on the button
+        });
+
+        //Scroll Take up challenge
+
+        challengeButton.addEventListener('click', () => {
+            const navbarHeight = navbar.offsetHeight;
+            const featuresPosition = featuresSection.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = featuresPosition - navbarHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        });
+
+        //Content Buttons Highlight
+        const featureButtons = document.querySelectorAll('.btn-features');
+
+        featureButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                featureButtons.forEach(btn => {
+                    btn.classList.remove('active-button');
+                });
+                button.classList.add('active-button');
+            });
+        });
+
+        // Set the initial active button
+        document.getElementById('button1').classList.add('active-button');
+
+        //Blur Content
+       
+        function showPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            blurContent();
+        }
+
+        function hidePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            removeBlur();
+        }
+
+        function blurContent() {
+            document.querySelectorAll('.blur-background').forEach(content => {
+                content.classList.add('blur');
+            });
+        }
+
+        function removeBlur() {
+            document.querySelectorAll('.blur-background').forEach(content => {
+                content.classList.remove('blur');
+            });
+        }
+
+        document.querySelectorAll('.btn-features').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.blur-background').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                document.getElementById(`content${index + 1}`).classList.remove('hidden');
+            });
+        });
+       
+//Content Functions
+
+        document.getElementById('button1').addEventListener('click', function() {
+    showContent('content1', 'button1');
+});
+
+document.getElementById('button2').addEventListener('click', function() {
+    showContent('content2', 'button2');
+});
+
+document.getElementById('button3').addEventListener('click', function() {
+    showContent('content3', 'button3');
+});
+
+document.getElementById('button4').addEventListener('click', function() {
+    showContent('content4', 'button4');
+});
+
+function showContent(contentId, buttonId) {
+    var contents = ['content1', 'content2', 'content3', 'content4'];
+    var buttons = ['button1', 'button2', 'button3', 'button4'];
+    
+    contents.forEach(function(id) {
+        var content = document.getElementById(id);
+        if (id === contentId) {
+            content.classList.remove('hidden');
+            content.style.display = 'block';
+        } else {
+            content.classList.add('hidden');
+            content.style.display = 'none';
+        }
+    });
+    
+    buttons.forEach(function(id) {
+        var button = document.getElementById(id);
+        if (id === buttonId) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+} 
+
+
+//Redirecting Get Started
+
+function btn1() {
+            window.location.href = 'page1.html';
+        }
+
+        function btn2() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn3() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn4() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn5() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn6() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn7() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn8() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn9() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn10() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn11() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn12() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn13() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn14() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn15() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn16() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn17() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn18() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn19() {
+            window.location.href = 'https://example.com';
+        }
+
+        function btn20() {
+            window.location.href = 'https://example.com';
+        }
+
+        </script>
+    
+</body>
+</html>

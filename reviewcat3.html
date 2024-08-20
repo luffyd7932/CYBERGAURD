@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Popup</title>
+   
+    <style>
+        body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 70%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.popup-content {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content img {
+    max-width: 70%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#next-btn {
+    background-color: #06b500;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#next-btn:hover {
+    background-color: #04a000;
+}
+
+    </style>
+</head>
+<body>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <img id="popup-img" src="" alt="Popup Photo">
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const images = [
+        'chromeout.jpg', // Replace with your actual image paths
+        'nvout.jpg',
+        'cat1wts2.jpeg'
+        
+    ];
+
+    let currentImageIndex = 0;
+
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popup-img');
+    const nextBtn = document.getElementById('next-btn');
+
+    function showImage(index) {
+        popupImg.src = images[index];
+    }
+
+    nextBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showImage(currentImageIndex);
+    });
+
+    // Initially show the first image
+    showImage(currentImageIndex);
+});
+
+    </script>
+</body>
+</html>
